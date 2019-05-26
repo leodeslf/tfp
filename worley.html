@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>TFP - Worley</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="Description" content="Texturas Fractales y Procedurales, generador de Ruido Worley">
+    <link rel="stylesheet" href="src/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Roboto:400,500" rel="stylesheet" />
+    <!-- rsc -->
+    <script type="module" src="src/js/UIs/main_UI.js"></script>
+    <script type="module" src="src/js/UIs/worley_UI.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="header_cont">
+            <a id="logo" href="index.html">
+                <h1 style="display: inline;">
+                    <p>Texturas Fractales y Procedurales</p>
+                    <p style="display: none;">TFP</p>
+                </h1>
+            </a>
+            <nav>
+                <a href="perlin.html">Ruido Perlin</a>
+                <hr>
+                <a href="worley.html">Ruido Worley</a>
+                <hr>
+                <a id="open_about">Acerca De</a>
+            </nav>
+            <img id="nav_switch" src="images/svg/nav_arrow.svg" alt="">
+        </div>
+    </header>
+    <main>
+        <article id="main_content">
+            <div id="canvas_cont" style="grid-template-areas: 'canvas''btns';
+            grid-template-rows: 256px 30px auto;">
+                <!-- main and color canvas here -->
+                <div id="btn_cont" style="display: flex;">
+                    <button id="btn_reset" class="btn_sec" title="Restaurar valores de Parámetros">
+                        Resetear
+                    </button>
+                </div>
+            </div>
+            <div id="param_cont">
+                <div class="flex_col">
+                    <div class="param_group">
+                        <div class="param_head">
+                            <img src="images/svg/config.svg" alt="Configuración" title="Configuración" />
+                        </div>
+                        <div class="param_body">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label for="chkAnimation">Animación</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="chkAnimation" checked />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="chkDeb">Debug</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="chkDeb" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="chkFlat">Color plano</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="chkFlat" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="chkInvert">Invertir</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="chkInvert" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="chkFade">Suavizado</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="chkFade" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="cboType">Punto relativo</label>
+                                        </td>
+                                        <td>
+                                            <select id="cboType">
+                                                <option value="st" selected>F1</option>
+                                                <option value="manhattan">F1 (Manhattan)</option>
+                                                <option value="chebyshev">F1 (Chebyshev)</option>
+                                                <option value="minkowski" disabled>F1 (Minkowski)</option>
+                                                <option value="nd">F2</option>
+                                                <option value="ndMinusSt">F2 menos F1</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="cboBG">Fondo</label>
+                                        </td>
+                                        <td>
+                                            <select id="cboBG">
+                                                <option value="grid">Grilla</option>
+                                                <option value="black" selected>Negro</option>
+                                                <option value="white">Blanco</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex_col">
+                    <div class="param_group">
+                        <div class="param_head">
+                            <img src="images/svg/settings.svg" alt="Parámetros" title="Parámetros" />
+                        </div>
+                        <div class="param_body">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label for="base">Base</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="base" default="0" value="0">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="mult">Multiplicador</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="mult" default="4" value="4" step="0.25">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="spots">Puntos</label>
+                                        </td>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="spots" default="18" value="18" step="1" min="2"
+                                                max="100">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article id="extras">
+            <section id="desc_a">
+                <hr>
+                <div>
+                    <h2>Ruido Worley o Ruido Celular: Origen</h2>
+                    <p style="margin: 32px 0;">
+                        <blockquote>
+                            En 1996 Steven Worley desarrolla un algoritmo capaz de generar texturas similares a un grupo
+                            de células, de ahi su nombre alternativo. Consta en determinar una serie de puntos en el
+                            plano (o espacio) y representar la distancia de cada pixel a dichos puntos (inicialmente, la
+                            distancia al más cercano). Es posible generar texturas como escamas, cristales, terrenos,
+                            entre otros.
+                        </blockquote>
+                    </p>
+                </div>
+                <hr>
+            </section>
+            <section id="desc_b">
+                <img src="images/cells.gif" alt="Células vegetales" title="Células vegetales" />
+                <p id="desc_b_desc">
+                    Vista microscópica de células vegetales.
+                </p>
+            </section>
+        </article>
+    </main>
+    <div id="about_interface" class="modal_bg" style="display: none;">
+        <div id="about">
+            <h2>Acerca de</h2><br>
+            <p>
+                Generador de texturas fractales y procedurales.
+            </p>
+            <hr style="margin: 32px 0;">
+            <p>
+                <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">
+                    <b>TFP</b>
+                </span>
+                por
+                <a style="font-weight: 400;" xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Wikarot"
+                    property="cc:attributionName" rel="cc:attributionURL">Leonardo
+                    de S.L.F</a>
+                bajo una licencia
+                <a style="font-weight: 400;" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                    CC BY-SA</a><br><br>
+            </p>
+            <p><b>Ruido Perlin</b> por Ken Perlin.</p>
+            <br>
+            <p><b>Ruido Worley</b> por Steven Worley.</p>
+        </div>
+    </div>
+    <div id="back_to_top">
+        <img src="images/svg/to_top.svg" alt="Ir arriba" />
+    </div>
+    <footer>
+        <div>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: flex;">
+                <img alt="Licencia de Creative Commons" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+                    style="display: inline;" />
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>

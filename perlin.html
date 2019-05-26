@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>TFP - Perlin</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="Description" content="Texturas Fractales y Procedurales, generador de Ruido Perlin">
+	<link rel="stylesheet" href="src/css/style.css" />
+	<link href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Roboto:400,500" rel="stylesheet" />
+	<!-- rsc -->
+	<script type="module" src="src/js/UIs/main_UI.js"></script>
+	<script type="module" src="src/js/UIs/perlin_UI.js"></script>
+</head>
+
+<body>
+	<header>
+		<div id="header_cont">
+			<a id="logo" href="index.html">
+				<h1 style="display: inline;">
+					<p>Texturas Fractales y Procedurales</p>
+					<p style="display: none;">TFP</p>
+				</h1>
+			</a>
+			<nav>
+				<a href="perlin.html">Ruido Perlin</a>
+				<hr>
+				<a href="worley.html">Ruido Worley</a>
+				<hr>
+				<a id="open_about">Acerca De</a>
+			</nav>
+			<img id="nav_switch" src="images/svg/nav_arrow.svg" alt="">
+		</div>
+	</header>
+	<main>
+		<article id="main_content">
+			<div id="canvas_cont">
+				<div id="main_canvas_cont">
+					<!-- main canvas here -->
+					<div id="zoom_btn_cont">
+						<button id="zoom_plus" style="transform: translateY(1px);">+</button>
+						<button id="zoom_minus">-</button>
+					</div>
+				</div>
+				<!-- color canvas here -->
+				<div id="btn_cont">
+					<button id="btn_reset" class="btn_sec" title="Restaurar valores de Aspecto y Onda">
+						Resetear
+					</button>
+					<button id="btn_open_download" class="btn_sec" title="Descargar muestra en .PNG">
+						<img class="icon" src="images/svg/descargar.svg" style="height: 26px; width: 26px;" />
+					</button>
+					<!-- <button id="btnApply">Aplicar</button> -->
+				</div>
+			</div>
+			<div id="param_cont">
+				<div class="flex_col">
+					<div class="param_group">
+						<div class="param_head">
+							<img class="icon" src="images/svg/config.svg" alt="Configuración" title="Configuración" />
+						</div>
+						<div class="param_body">
+							<table>
+								<tbody>
+									<tr>
+										<td>
+											<label for="chkAnimation">Animación</label>
+										</td>
+										<td>
+											<input type="checkbox" id="chkAnimation" checked />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="cboType">Tipo</label>
+										</td>
+										<td>
+											<select id="cboType">
+												<optgroup label="Clasicos">
+													<option value="1D">1D</option>
+													<option value="2D">2D</option>
+													<option value="3D" selected>3D (plano)</option>
+												</optgroup>
+												<optgroup label="Variaciones">
+													<option value="3D_Ridge">3D - Surcado</option>
+													<option value="3D_Flow">3D - Fluido</option>
+													<option value="3D_SinX">3D - Tallado</option>
+													<option value="3D_SinXRidge">3D - Tallado &
+														Surcado</option>
+													<option value="3D_Flame">3D - Flama</option>
+													<option value="3D_C">3D - Centro</option>
+													<option value="3D_CRidge">3D - Centro &
+														Surcado</option>
+												</optgroup>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="cboBG">Fondo</label>
+										</td>
+										<td>
+											<select id="cboBG">
+												<option value="grid">Grilla</option>
+												<option value="black" selected>Negro</option>
+												<option value="white">Blanco</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="cboColors">Colores</label>
+										</td>
+										<td>
+											<select id="cboColors">
+												<option value="agua">Agua</option>
+												<option value="arco">Arco de corriente</option>
+												<option value="blanco_negro">Blanco y negro</option>
+												<option value="burbujas">Burbujas</option>
+												<option value="combustion">Combustión</option>
+												<option value="escalera">Escalera</option>
+												<option value="infra_ultra">Infrarrojo - ultravioleta</option>
+												<option value="marmol">Mármol</option>
+												<option value="metalico">Metálico</option>
+												<option value="nubes">Nubes</option>
+												<option value="por_defecto" selected>Por defecto</option>
+												<option value="tierra">Tierra</option>
+												<option value="rgb_solid">RGB</option>
+												<!-- <option value="demo_0">000</option> -->
+											</select>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="param_group" id="aspect">
+						<div class="param_head">
+							<img class="icon" src="images/svg/resolucion.svg" alt="Aspecto" title="Aspecto" />
+						</div>
+						<div class="param_body">
+							<table>
+								<tbody>
+									<tr>
+										<td>
+											<p>Resolución</p>
+										</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td><label for="resX" class="sub_label">ancho</label></td>
+										<td>
+											<input type="number" default="256" value="256" min="16" id="resX" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="resY" class="sub_label">alto</label>
+										<td>
+											<input type="number" default="256" value="256" min="16" id="resY" />
+										</td>
+									</tr>
+									<tr>
+										<td>Traslación</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>
+											<label for="traX" class="sub_label">horizontal</label>
+										</td>
+										<td>
+											<input type="number" default="0" value="0" id="traX" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="traY" class="sub_label">vertical</label>
+										</td>
+										<td>
+											<input type="number" default="0" value="0" id="traY" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="dataSize"
+												title="Cantidad de pixeles (al cuadrado) que pinta c/dato">
+												Pixeles por dato
+											</label>
+										</td>
+										<td>
+											<input type="number" default="2" value="2" min="1" step="1" id="dataSize" />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="flex_col">
+					<div class="param_group">
+						<div class="param_head">
+							<img class="icon" src="images/svg/grafico.svg" alt="Onda" title="Onda" />
+						</div>
+						<div class="param_body">
+							<table>
+								<tbody>
+									<tr>
+										<td>
+											<label for="freq">Frecuencia inicial</label>
+										</td>
+										<td>
+											<input type="number" default="1" value="1" min="1" id="freq" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="amp">Amplitud inicial</label>
+										</td>
+										<td>
+											<input type="number" default="255" value="255" id="amp" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="oct">Octavas</label>
+										</td>
+										<td>
+											<input type="number" default="6" value="6" max="32" min="1" step="1"
+												id="oct" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="lac"
+												title="Factor que multiplica la Frecuencia tras cada Octava">Lacunaridad</label>
+										</td>
+										<td>
+											<input type="number" default="2" value="2" id="lac" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="per"
+												title="Factor que multiplica la Amplitud tras cada Octava">Persistencia</label>
+										</td>
+										<td>
+											<input type="number" default="0.5" value="0.5" step="0.5" id="per" />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="param_group" id="time">
+						<div class="param_head">
+							<img class="icon" src="images/svg/reloj.svg" alt="Tiempo" title="Tiempo" />
+						</div>
+						<div class="param_body">
+							<table>
+								<tbody>
+									<tr>
+										<td style="width: unset;">
+											<label for="deltaT">Delta Tiempo</label>
+										</td>
+										<td colspan="2" style="width: unset;">
+											<input type="number" default="0.01" value="0.01" step="0.005" id="deltaT" />
+										</td>
+									</tr>
+									<tr>
+										<td style="width: unset;">
+											<label for="exactT">Momento exacto</label>
+										</td>
+										<td style="width: unset;">
+											<input type="number" default="0" value="0" step="0.005" id="exactT"
+												style="max-width: 48px;" />
+										</td>
+										<td style="width: unset;">
+											<label for="chkExactT" style="margin-bottom: 2px;">Ir</label>
+											<input type="checkbox" id="chkExactT" />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+		</article>
+		<article id="extras">
+			<section id="desc_a">
+				<hr>
+				<div>
+					<h2>Ruido Perlin: Orígen</h2><br>
+					<blockquote>
+						"El modelo conceptual del ruido Perlin fue descubierto en 1982 por <a
+							href="http://mrl.nyu.edu/~perlin/" target="_blank">Ken Perlin</a> como resultado de su
+						trabajo de generación de texturas para la película Tron. Desde entonces, el ruido Perlin, y
+						pequeñas variantes posteriores (como el ruido Simplex) son la base para generar efectos como
+						fuego, humo, nubes… texturas como madera, mármol, granito… mapas de altura, etc, de forma
+						totalmente automática. En esencia, nos permite generar patrones de forma muy similar a como
+						lo suele hacer la naturaleza."
+					</blockquote><br>
+					<p>
+						Artículo del autor <a style="font-weight: 700; text-decoration: underline black;"
+							href="https://www.lanshor.com/ruido-perlin/" target="_blank">aquí</a>.
+					</p>
+				</div>
+				<hr>
+			</section>
+			<section id="desc_b">
+				<img src="images/vase.gif" alt="Perlin Vase (Vasija de Perlin)"
+					title="Perlin Vase (Vasija de Perlin)" />
+				<p id="desc_b_desc">
+					<b>Perlin Vase</b> (Disney, Tron. 1997). Ken Pelin
+					recibió un <i>Oscar</i> gracias a su trabajo.
+				</p>
+			</section>
+			<section id="flow_field">
+				<h2>Campo de Flujo</h2><br>
+				<p>
+					Consiste en utilizar valores de Ruido Perlin para manipular la <b>rotación de vectores</b>.<br>
+					<i class="detail">Click sobre los ejemplos para reiniciar</i>
+				</p>
+				<div id="ff_can_cont">
+					<div id="ff_can_cont_b">
+						<!-- ff_canvas here -->
+						<i class="detail">Visualizando <b>rastro</b> de partículas.</i>
+					</div>
+					<div id="ff_can_cont_a">
+						<!-- ff_canvas here -->
+						<i class="detail">Simulando <b>Mapa de vientos</b>.</i>
+					</div>
+				</div>
+				<hr>
+			</section>
+			<section id="gallery" style="width: 100%;">
+				<div id="gallery_img_cont">
+					<img data-src="images/examples/a0.png" title="Demo 1, Blanco y Negro" />
+					<img data-src="images/examples/a1.png" title="Demo 2, Tierra" />
+					<img data-src="images/examples/a2.png" title="Demo 3, Piscina" />
+					<img data-src="images/examples/a3.png" title="Demo 4, Nubes" />
+					<img data-src="images/examples/b0.png" title="Demo 5, Colores" />
+					<img data-src="images/examples/b1.png" title="Demo 6, Abstracto (Escalonado)" />
+					<img data-src="images/examples/b2.png" title="Demo 7, Burbujas" />
+					<img data-src="images/examples/b3.png" title="Demo 8, Flama" />
+					<img data-src="images/examples/b4.png" title="Demo 9, Marmol" />
+					<img data-src="images/examples/b5.png" title="Demo 10, Abstracto (funci'on Coseno)" />
+				</div>
+			</section>
+		</article>
+	</main>
+	<!-- special elements -->
+	<div id="download_interface" class="modal_bg" style="display: none;">
+		<div class="param_body" id="download">
+			<table id="download_table">
+				<tbody>
+					<tr>
+						<td colspan="2" style="text-align-last: left">
+							<label for="dresX">Resolución de imágen (pixels)</label>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<label class="sub_label" for="dresX">ancho</label>
+						</td>
+						<td>
+							<input type="number" id="dresX" default="400" value="400" min="1" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label class="sub_label" for="dresY">alto</label>
+						</td>
+						<td>
+							<input type="number" id="dresY" default="300" value="300" min="1" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<button id="btn_cancel" class="btn_sec">Cancelar</button>
+			<button id="btn_download">Descargar</button>
+		</div>
+	</div>
+	<div id="about_interface" class="modal_bg" style="display: none;">
+		<div id="about">
+			<h2>Acerca de</h2><br>
+			<p>
+				Generador de texturas fractales y procedurales.
+			</p>
+			<hr style="margin: 32px 0;">
+			<p>
+				<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">
+					<b>TFP</b>
+				</span>
+				por
+				<a style="font-weight: 400;" xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Wikarot"
+					property="cc:attributionName" rel="cc:attributionURL">Leonardo
+					de S.L.F</a>
+				bajo una licencia
+				<a style="font-weight: 400;" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+					CC BY-SA</a><br><br>
+			</p>
+			<p><b>Ruido Perlin</b> por Ken Perlin.</p>
+			<br>
+			<p><b>Ruido Worley</b> por Steven Worley.</p>
+		</div>
+	</div>
+	<div id="back_to_top">
+		<img class="icon" src="images/svg/to_top.svg" alt="Ir arriba" />
+	</div>
+	<footer>
+		<div>
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: flex;">
+				<img alt="Licencia de Creative Commons" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+					style="display: inline;" />
+			</a>
+		</div>
+	</footer>
+</body>
+
+<style>
+	#main_canvas {
+		cursor: grab;
+	}
+</style>
+
+</html>

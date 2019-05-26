@@ -1,0 +1,84 @@
+/**
+ * 
+ * Long version
+ * 
+ * function perlin2DGen(x,y) {
+ *     var xi=Math.floor(x)&255;        //parte entera X
+ *     var yi=Math.floor(y)&255;        //parte entera Y
+ *     var xf=x-Math.floor(x);          //parte decimal X
+ *     var yf=y-Math.floor(y);          //parte decimal Y
+ *     var g1=p[p[xi]+yi];              //gradiente 1
+ *     var g2=p[p[xi+1]+yi];            //gradiente 2
+ *     var g3=p[p[xi]+yi+1];            //gradiente 3
+ *     var g4=p[p[xi+1]+yi+1];          //gradiente 4
+ *     var d1=grad(g1,xf,yf);           //producto de punto 1
+ *     var d2=grad(g2,xf-1,yf);         //producto de punto 3
+ *     var d3=grad(g3,xf,yf-1);         //producto de punto 3
+ *     var d4=grad(g4,xf-1,yf-1);       //producto de punto 4
+ *     var u=fade(xf);                  //difuminado en X
+ *     var v=fade(yf);                  //difuminado en Y
+ *     var xAB=lerp(u,d1,d2);           //interpolacion 1 (A,B)
+ *     var xCD=lerp(u,d3,d4);           //interpolacion 2 (C,D)
+ *     var yABCD=lerp(v,xAB,xCD);       //interpolacion 3 (AB,CD)
+ *     return yABCD;                    //valor final (entre -1 y 1)
+ * }
+ * 
+ */
+
+Estudio
+
+----------------------------------------
+Ruido Perlin 2D
+----------------------------------------
+Pseudodegradado para cada vertice:
+
+(gx,gy)
+----------------------------------------
+Producto escalar aplicado a cada vertice
+entre gradiente y distancia a input:
+
+(gx,gy)*(dx,dy) ---> gx*dx+gy*dy
+----------------------------------------
+Interpolacion bilineal entre 
+productos escalares:
+
+Punto A=(g0,g0)
+Punto B=(g1,g0)
+Punto C=(g0,g1)
+Punto D=(g1,g1)
+
+Interpolacion AB:
+AB=PuntoA+FracX*(PuntoB-PuntoA)
+
+Interpolacion CD:
+CD=PuntoC+FracX*(PuntoD-PuntoC)
+
+Interpolacion ABCD:
+ABCD=AB+FracY*(CD-AB)
+----------------------------------------
+Funcion Difuminado (Fade Function)
+
+Viejo: 3t^2-2t^3
+Nuevo: 6t^5-15t^4+10t^3
+----------------------------------------
+
+Posibilidades de logo
+
+        _____________ _____________   |   _____________ _____________
+       /            //            /\  |  /\            \\            \
+      /    ________//____    ____/ /  |  \ \     _______\\____    ____\
+     /    /____ ___\\___/   /\___\/   |   \ \    \______//___/\   \___/
+    /    _____/\       /   / /        |    \ \     _____\    \ \   \
+   /    /\____\/      /   / /         |     \ \    \____/     \ \   \
+  /____/ /           /___/ /          |      \ \____\          \ \___\
+  \____\/            \___\/           |       \/____/           \/___/
+                                      |
+--------------------------------------+--------------------------------------
+   _____________ _____________        |        _____________ _____________
+  /____________//____________/\       |       /\____________\\____________\
+  \            \\            \ \      |      / /            //            /
+   \     _______\\____    ____\/      |     / /    ________//____    ____/
+    \    \_____/\     \   \ \         |    / /    /____\      / /   /
+     \     ____\/      \   \ \        |   / /    ______/     / /   /
+      \    \ \          \   \ \       |  / /    /           / /   /
+       \____\/           \___\/       |  \/____/            \/___/
