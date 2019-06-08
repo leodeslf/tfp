@@ -364,7 +364,7 @@ function data3DSinXRidge() {
                 f2 *= pp.lacunarity, a05 *= pp.persistence) {
                 // value plus K pp.to avoid pp.the 'center artifact'
                 nAux = PERLIN.noise3D((u + k) * f2, (v + k) * f2, pp.t);
-                n = n + (nAux > 0 ? nAux : -nAux) * a0;
+                n = n + (nAux > 0 ? nAux : -nAux) * a05;
             }
             n = n / maxA;
             n = Math.sin((x + n) * 25);

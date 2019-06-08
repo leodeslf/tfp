@@ -2,7 +2,7 @@
  * 
  */
 
- import { canB, ctxB } from '../UIs/perlin_UI.js';
+import { canB, ctxB } from '../UIs/perlin_UI.js';
 import FFDot from '../libs/FlowField_Dot.js';
 import PERLIN from '../libs/Perlin.js';
 import { PI } from '../libs/utils.js';
@@ -98,11 +98,13 @@ function resetFFB() {
     count = 0;
     timeB = Math.random() * 256;
     ctxB.clearRect(0, 0, canB.width, canB.height);
+    vecArrayB = [];
     vecArrayB = createVecArray(
         timeB, gridB, canB.width,
         canB.height, gridB * 20, 2
     );
     let b2 = new Vector(canB.width, canB.height);
+    dotArrayB = [];
     dotArrayB = createDotArray(
         DOTS2, 'replace', b2, vecArrayB, dotArrayB, gridB,
         (Math.random() * .012) + .02, .475

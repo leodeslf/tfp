@@ -59,3 +59,7 @@ const PERLIN = {
 - TFP: **[Leonardo de S.L.F](https://github.com/Wikarot "GitHub profile")**
 - Perlin Noise: **Ken Perlin**
 - Worley Noise: **Steven Worley**
+
+## License
+
+Texturas Fractales y Procedurales CC BY-NC 2018 by Leonardo de S.L.F.

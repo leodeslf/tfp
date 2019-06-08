@@ -141,11 +141,13 @@ function loopFFA() {
 }
 function resetFFA() {
     timeA = Math.random() * 256;
+    vecArrayA = [];
     vecArrayA = createVecArray(
         timeA, gridA, canA.width,
         canA.height, gridA * 15, 3
     );
     let b1 = new Vector(canA.width, canA.height);
+    dotArrayA = [];
     dotArrayA = createDotArray(
         DOTS1, 'infinite', b1, vecArrayA, dotArrayA, gridA,
         (Math.random() * .04) + .07, 1.5
