@@ -19,7 +19,7 @@ let tempCanvas = document.createElement('canvas');
 let tempC = tempCanvas.getContext('2d');
 let colorImg = new Image(256, 32);
 colorImg.src =
-    '../../images/textures/blanco_negro.png';
+    'images/textures/blanco_negro.png';
 colorImg.onload = () => {
     tempC.drawImage(colorImg, 0, 0);
     pp.colorData = tempC.getImageData(0, 0, 256, 1).data;
@@ -55,6 +55,6 @@ window.addEventListener('load', () => {
     // init worley demo
     initSpots(15, .35);
     startWPLoop();
-    
+
     tempCanvas = tempC = null;
 });
