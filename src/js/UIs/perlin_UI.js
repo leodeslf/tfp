@@ -25,7 +25,7 @@ const SET = {
 };
 let baseColor;
 let defaultColor = new Image(256, 32);
-const defaultColorSrc = 'images/textures/por_defecto.png';
+const defaultColorSrc = 'TFP/images/textures/por_defecto.png';
 
 window.addEventListener('load', () => {
     let chkAnimation = elemId('chkAnimation');
@@ -112,7 +112,7 @@ window.addEventListener('load', () => {
     function setBG() {
         if (cboBG.value === 'grid') {
             textCan.style.background = mainCan.style.background
-                = 'url(images/bg.png)';
+                = 'url(TFP/images/bg.png)';
         } else {
             mainCan.style.background = textCan.style.background
                 = cboBG.value;
@@ -129,7 +129,7 @@ window.addEventListener('load', () => {
             // Not 1D and not default, loads color
             baseColor = new Image(256, 32);
             baseColor.src =
-                'images/textures/' + cboColors.value + '.png';
+                'TFP/images/textures/' + cboColors.value + '.png';
             baseColor.onload = () => {
                 textCtx.clearRect(0, 0, 256, 16);
                 textCtx.drawImage(baseColor, 0, 0);
