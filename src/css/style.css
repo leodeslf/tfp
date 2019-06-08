@@ -476,7 +476,7 @@ input:disabled, select:disabled {
 }
 
 #gallery_img_cont img {
-  background-image: url('/images/bg.png');
+  background-image: url('images/bg.png');
   box-shadow: var(--shadow-b);
   height: 128px;
   outline: var(--outln-low);
@@ -768,11 +768,3 @@ input:disabled, select:disabled {
     margin-bottom: 64px;
   }
 }
-
-/* ==================== KEYFRAMES ==================== */
-
-/* ==================== KEYFRAMES ==================== */
-
-/* ==================== KEYFRAMES ==================== */
-
-@keyframes focusloop {}
