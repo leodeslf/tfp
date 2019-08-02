@@ -1,11 +1,5 @@
 # Texturas Fractales y Procedurales
 
-## Table of Contents
-
-- [About](#About)
-- [How it works](#How-It-Works)
-- [Credits](#Credits)
-
 ## About
 
 TFP is an app that generates custom Perlin and Worley Noise images.
@@ -45,4 +39,4 @@ const WORLEY = {
 
 ## License
 
-Texturas Fractales y Procedurales CC BY-NC 2018 by [Leonardo de S.L.F](https://github.com/Wikarot "GitHub profile").
+Texturas Fractales y Procedurales (TFP) CC BY-NC 2018 by [Leonardo de S.L.F](https://github.com/Wikarot "GitHub profile").
