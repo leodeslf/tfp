@@ -134,7 +134,7 @@ function data_print1D() {
         f2 = pp.frequency;
         a05 = 1.0;
         maxA = 0.0;
-        for (let k = 0; k < pp.octaves; k++ , maxA += a05,
+        for (let k = 0; k < pp.octaves; k++, maxA += a05,
             f2 *= pp.lacunarity, a05 *= pp.persistence) {
             // value plus K to avoid the 'center artifact'
             n = n + PERLIN.noise1D((u + k) * f2 + pp.t) * a05;
@@ -169,7 +169,7 @@ function data2D() {
             f2 = pp.frequency;
             a05 = 1.0;
             maxA = 0.0;
-            for (let k = 0; k < pp.octaves; k++ , maxA += a05,
+            for (let k = 0; k < pp.octaves; k++, maxA += a05,
                 f2 *= pp.lacunarity, a05 *= pp.persistence) {
                 // value plus K pp.to avoid pp.the 'center artifact'
                 n = n + PERLIN.noise2D(
@@ -202,7 +202,7 @@ function data3D() {
             f2 = pp.frequency;
             a05 = 1.0;
             maxA = 0.0;
-            for (let k = 0; k < pp.octaves; k++ , maxA += a05,
+            for (let k = 0; k < pp.octaves; k++, maxA += a05,
                 f2 *= pp.lacunarity, a05 *= pp.persistence) {
                 // value plus K pp.to avoid pp.the 'center artifact'
                 n = n + PERLIN.noise3D(
@@ -235,7 +235,7 @@ function data3DFlow() {
             f2 = pp.frequency;
             a05 = 1.0;
             maxA = 0.0;
-            for (let k = 0; k < 5; k++ , maxA += a05, f2 *= pp.lacunarity,
+            for (let k = 0; k < 5; k++, maxA += a05, f2 *= pp.lacunarity,
                 a05 *= pp.persistence) {
                 // value plus K to avoid the 'center artifact'
                 rot = rot + PERLIN.noise3D(
@@ -256,7 +256,7 @@ function data3DFlow() {
             f2 = pp.frequency;
             a05 = 1.0;
             maxA = 0.0;
-            for (let k = 0; k < pp.octaves; k++ , maxA += a05,
+            for (let k = 0; k < pp.octaves; k++, maxA += a05,
                 f2 *= pp.lacunarity, a05 *= pp.persistence) {
                 // value plus K to avoid the 'center artifact'
                 n = n + PERLIN.noise3D(
@@ -291,7 +291,7 @@ function data3DRidge() {
             f2 = pp.frequency * .5;
             a05 = 1.0;
             maxA = 0.0;
-            for (let k = 0; k < pp.octaves; k++ , maxA += a05,
+            for (let k = 0; k < pp.octaves; k++, maxA += a05,
                 f2 *= pp.lacunarity, a05 *= pp.persistence) {
                 // value plus K to avoid the 'center artifact'
                 nAux = PERLIN.noise3D((u + k) * f2, (v + k) * f2, pp.t);
@@ -324,7 +324,7 @@ function data3DSinX() {
             f2 = pp.frequency;
             a05 = 1.0;
             maxA = 0.0;
-            for (let k = 0; k < pp.octaves; k++ , maxA += a05,
+            for (let k = 0; k < pp.octaves; k++, maxA += a05,
                 f2 *= pp.lacunarity, a05 *= pp.persistence) {
                 // value plus K pp.to avoid pp.the 'center artifact'
                 n = n + PERLIN.noise3D(
@@ -360,7 +360,7 @@ function data3DSinXRidge() {
             f2 = pp.frequency;
             a05 = 1.0;
             maxA = 0.0;
-            for (let k = 0; k < pp.octaves; k++ , maxA += a05,
+            for (let k = 0; k < pp.octaves; k++, maxA += a05,
                 f2 *= pp.lacunarity, a05 *= pp.persistence) {
                 // value plus K pp.to avoid pp.the 'center artifact'
                 nAux = PERLIN.noise3D((u + k) * f2, (v + k) * f2, pp.t);
@@ -392,7 +392,7 @@ function data3DFlame() {
             f2 = pp.frequency;
             a05 = 1.0;
             maxA = 0.0;
-            for (let k = 0; k < pp.octaves; k++ , maxA += a05,
+            for (let k = 0; k < pp.octaves; k++, maxA += a05,
                 f2 *= pp.lacunarity, a05 *= pp.persistence) {
                 // value plus K pp.to avoid pp.the 'center artifact'
                 n = n + PERLIN.noise3D(
@@ -402,7 +402,8 @@ function data3DFlame() {
                 ) * a05;
             }
             n = n / maxA;
-            n = Math.sin(((x / pp.width + n) / 1) * PI) -
+            n = Math.sin(
+                ((x / pp.width + n) / 1) * PI) -
                 ((pp.height - y) / pp.height * 2);
             n = (n + 1) * .5;
             n = n * pp.amplitude;
@@ -438,7 +439,7 @@ function data3DC() {
             f2 = pp.frequency;
             a05 = 1.0;
             maxA = 0.0;
-            for (let k = 0; k < pp.octaves; k++ , maxA += a05,
+            for (let k = 0; k < pp.octaves; k++, maxA += a05,
                 f2 *= pp.lacunarity, a05 *= pp.persistence) {
                 // value plus K pp.to avoid pp.the 'center artifact'
                 n = n + PERLIN.noise3D(
@@ -484,7 +485,7 @@ function data3DCRidge() {
             f2 = pp.frequency;
             a05 = 1.0;
             maxA = 0.0;
-            for (let k = 0; k < pp.octaves; k++ , maxA += a05,
+            for (let k = 0; k < pp.octaves; k++, maxA += a05,
                 f2 *= pp.lacunarity, a05 *= pp.persistence) {
                 // value plus K pp.to avoid pp.the 'center artifact'
                 nAux = PERLIN.noise3D(

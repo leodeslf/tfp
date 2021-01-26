@@ -39,4 +39,4 @@ const WORLEY = {
 
 ## License
 
-Texturas Fractales y Procedurales (TFP) CC BY-NC 2018 by [Leonardo de S.L.F](https://github.com/Wikarot "GitHub profile").
+Texturas Fractales y Procedurales (TFP) CC BY-NC 2018 by [Leonardo de S.L.F](https://github.com/leodeslf "GitHub profile").
